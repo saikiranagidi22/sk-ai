@@ -20,9 +20,9 @@ const Main = ({ setRecentPrompt, recentPrompt }) => {
         setRecentPrompt([searchText, ...recentPrompt]);
         setSearchText("")
         run(searchText).then((res) => {
-            console.log(res)
-            console.log(recentPrompt)
-            setResultData(res)
+            console.log(res.split("*"))
+            // console.log(recentPrompt)
+            setResultData(res.split("*"))
             setLoading(true);
         });
     }

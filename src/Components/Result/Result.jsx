@@ -24,7 +24,11 @@ const Result = ({ result, loading, question }) => {
               <p className="question bubble">
                 {question}
               </p>
-              <p className="bubble result-style">{result}</p>
+              <div className="bubble result-style">
+                {result.map((para)=>{
+                  return <p>{para}</p>
+                })}
+              </div>
             </>
           }
         </div>

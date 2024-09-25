@@ -60,7 +60,7 @@
 }
 @media (max-width:600px){
     .slidebar{
-        display: none;
+        /* display: none; */
     }
 
 }
