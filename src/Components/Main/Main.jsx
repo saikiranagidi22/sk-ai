@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Main.css'
 import { assets } from '../../assets/assets'
 import run from '../../config/sk'
 import Result from '../Result/Result'
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const Main = ({ setRecentPrompt, recentPrompt }) => {
 
@@ -12,6 +13,15 @@ const Main = ({ setRecentPrompt, recentPrompt }) => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
+    const [isListen, setIsListen] = useState(true);
+
+    const{
+        transcript,
+        listening,
+        resetTranscript,
+        browserSupportsSpeechRecognition
+        
+    } = useSpeechRecognition({transcribing: true});
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -26,6 +36,12 @@ const Main = ({ setRecentPrompt, recentPrompt }) => {
             setLoading(true);
         });
     }
+
+    useEffect(()=> {
+        console.log(transcript)
+        console.log(listening)
+        setSearchText(transcript)
+    },[transcript])
 
     return (
         <div className="main">
@@ -67,7 +83,7 @@ const Main = ({ setRecentPrompt, recentPrompt }) => {
                     }} type="text" placeholder='Enter a prompt here' />
                     <div>
                         <img src={assets.gallery_icon} alt="" />
-                        <img src={assets.mic_icon} alt="" />
+                        <span className={`mic-icon ${listening ? "active" : ''}`} onClick={SpeechRecognition.startListening} ><i class="fa-solid fa-microphone"></i></span>
                         <button type="submit"><img src={assets.send_icon} alt="" /></button>
                     </div>
                 </form>

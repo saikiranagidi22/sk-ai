@@ -109,6 +109,15 @@
     padding: 0;
     border: none;
 }
+
+.mic-icon {
+    display: inline-block;
+    font-size: 1.5rem;
+}
+
+.mic-icon.active {
+    color: #00ff00;
+}
 @media (max-width:600px){
     .main-bottom input{
         flex: none;
